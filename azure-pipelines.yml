@@ -1,7 +1,7 @@
 
 name: $(BuildDefinitionName)_$(VersionNumber)_$(SourceBranchName)
 trigger:
-- master
+- main
 parameters:
 - name: logging
   default: All
