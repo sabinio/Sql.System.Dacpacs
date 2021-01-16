@@ -1,7 +1,7 @@
 {
     "environment":"{$environment}",
     "ProjectName": "sql.system.dacpacs",
-    "FullVersion":"{$env:VersionNumber}",
+    "FullVersion":"{$env:VERSIONNUMBER}",
     "ForceDeploy": false,
     "CleanBuild":false
 }
