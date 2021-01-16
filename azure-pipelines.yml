@@ -22,6 +22,7 @@ variables:
 stages:
 - stage: build
   displayName: Build 
+  jobs:
   - job: Build
     displayName: Build jobs 
     steps:
