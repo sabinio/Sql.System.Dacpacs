@@ -18,7 +18,8 @@ variables:
   value: $(BaseVersionNumber).$(Minor)
 - name: verboselogging
   value: ${{parameters.logging}}
-
+pool:
+  vmImage: 'windows-latest'
 stages:
 - stage: build
   displayName: Build 
