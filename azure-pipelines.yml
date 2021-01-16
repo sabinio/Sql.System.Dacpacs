@@ -43,8 +43,8 @@ stages:
       displayName: 'Package'
 
     - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifacts System.Sql.Dacpacs'
+      displayName: 'Publish Artifacts Sql.System.Dacpacs'
       inputs:
-        PathtoPublish: '$(artifactsPath)/System.Sql.Dacpacs'
+        PathtoPublish: '$(artifactsPath)/Sql.System.Dacpacs'
         ArtifactName: 'Sql.System.Dacpacs'
       condition: succeededOrFailed()
