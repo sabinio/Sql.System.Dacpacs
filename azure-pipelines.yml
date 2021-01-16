@@ -39,7 +39,7 @@ stages:
       displayName: 'Build'
 
     - powershell: |
-        &"$(System.DefaultWorkingDirectory)/.build/pipeline-tasks.ps1" -Package    
+        &"$(System.DefaultWorkingDirectory)/.build/pipeline-tasks.ps1" -Package -Install
       displayName: 'Package'
 
     - task: PublishBuildArtifacts@1
