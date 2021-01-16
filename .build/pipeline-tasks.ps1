@@ -48,7 +48,7 @@ try {
 	write-host ("##vso[task.setvariable variable=ProjectName;]{0}" -f $settings.ProjectName)
 
 	Write-Host ($settings | Convertto-json)
-	#Write-Host (Get-ChildItem env: | out-string)
+	Write-Host (Get-ChildItem env: | out-string)
 	Write-Host "##[endgroup]"
 
     if ($Build) {     
