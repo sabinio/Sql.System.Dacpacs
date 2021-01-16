@@ -1,0 +1,6 @@
+{
+    "sqlAdminPassword": "AnGCO6JDFvWoxN7MDhWL7yJj",
+    "environment": "prod",
+    "azure":"true",
+    "smokeTest":true
+}

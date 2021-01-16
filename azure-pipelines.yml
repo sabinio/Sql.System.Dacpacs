@@ -1,0 +1,48 @@
+
+name: $(BuildDefinitionName)_$(VersionNumber)_$(SourceBranchName)
+trigger:
+- master
+parameters:
+- name: logging
+  default: All
+  type: string
+
+variables:
+- name: artifactsPath
+  value: "$(Build.ArtifactStagingDirectory)/artifacts"
+- name: BaseVersionNumber 
+  value: "0.1"  
+- name: Minor 
+  value: $[counter(variables['BaseVersionNumber'], 1)]
+- name: VersionNumber 
+  value: $(BaseVersionNumber).$(Minor)
+- name: verboselogging
+  value: ${{parameters.logging}}
+
+stages:
+- stage: build
+  displayName: Build 
+  - job: Build
+    displayName: Build jobs 
+    steps:
+    - checkout: self
+      clean: false 
+
+    - powershell: |
+       &"$(System.DefaultWorkingDirectory)/.build/pipeline-tasks.ps1" -Install   
+      displayName: 'Install tools'
+
+    - powershell: |
+        &"$(System.DefaultWorkingDirectory)/.build/pipeline-tasks.ps1" -Build  -Install  
+      displayName: 'Build'
+
+    - powershell: |
+        &"$(System.DefaultWorkingDirectory)/.build/pipeline-tasks.ps1" -Package    
+      displayName: 'Package'
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifacts System.Sql.Dacpacs'
+      inputs:
+        PathtoPublish: '$(artifactsPath)/System.Sql.Dacpacs'
+        ArtifactName: 'Sql.System.Dacpacs'
+      condition: succeededOrFailed()

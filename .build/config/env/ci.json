@@ -1,0 +1,8 @@
+{
+    "sqlAdminPassword": "AnGCO6JDFvWoxN7MDhWL7yJj",
+    "environment": "ci-$($env:Build_SourceBranchName.replace('_','-'))",
+    "SSDTVariables": ["/p:CreateNewDatabase=false","/p:DropObjectsNotInSource=false"],
+    "resourceGroupExpirationDays":1,
+    "azure":"true",
+    "smokeTest":true
+}

@@ -1,0 +1,8 @@
+{
+    "environment":"localdev",
+    "serverName": ".",
+    "sqlAdminLogin":"",
+    "AddMyIp":true,
+    "smokeTest":true,
+    "tSQLTests":true
+}

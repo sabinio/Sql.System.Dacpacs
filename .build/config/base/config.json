@@ -1,0 +1,61 @@
+{
+    "environment":"",
+    "ResourceGroupLocation":"uksouth",
+    "ProjectName": "TemplateProject",
+    "fnProjectName" : "HelloWorldKeyvault",
+
+    "SolutionPath" : "src/$($settings.ProjectName).sln",
+
+    "Projects":[{"Project":"src/$($settings.ProjectName).db/$($settings.ProjectName).db.sqlproj","Name":"$($settings.ProjectName).db"}
+                ,{"Project":"src/$($settings.ProjectName).Db.tSqlt/$($settings.ProjectName).Db.tSQLt.sqlproj","Name":"$($settings.ProjectName).Db.tSQLt"}],
+    "TargetDatabaseName": "$($settings.ProjectName)-$($settings.environment)",    
+    
+    "sqlServerName": "{\"$($settings.ProjectName)-$($settings.environment)$($Env.SourceBranch)\".toLower().replace('_','-')}",
+    "serverName": "$($settings.sqlServerName).database.windows.net",
+    "ResourceGroupName": "$($settings.ProjectName)-$($settings.environment)-$($settings.ResourceGroupLocation)",
+    "databaseName": "$($settings.TargetDatabaseName)",
+    "sqlSku": "$($settings.serviceObjective)",
+    "datafactoryname": "$($settings.ProjectName)-$($settings.environment)-adf",
+    "datafactorylocation": "$($settings.ResourceGroupLocation)",
+    "adminUserObjectId": "15053e31-bd16-4312-8dc2-e263d9419392",
+    "adminUserLogin": "simon@sabin.io",
+    "sqlAdminLogin": "sqladmin",
+    "sqlAdminPassword":"dummyvalue",
+    "SecurePassword": "{ConvertTo-SecureString -AsPlainText -Force $Settings.sqlAdminPassword}",
+    "ServiceObjective":"GP_S_Gen5_4",
+    "DbAction":"publish",
+    "SSDTVariables":"",
+    "FunctionAppName": "{($Settings.environment + $Settings.ProjectName + 'App').replace('-','')}",
+    "storageNameLong" : "$($Settings.environment.replace('-','').tolower())$($Settings.ProjectName.tolower())",
+    "storageName" : "$($Settings.storageNameLong.substring(0,[math]::min(22,$Settings.storageNameLong.length - 1)))sg",
+    "serverfarmsPlanName" : "$($Settings.environment)_$($Settings.ProjectName)_Sfp",     
+    "SQLCMDVariables": "",
+    "Suffix":"",
+    "resourceGroupExpirationDays": null,
+    "SubscriptionId": "ca3813f0-46e8-46fb-869b-8aa82fe03c17",
+    "ExtraMSBuildSwitches": [ "/p:GenerateSqlClrDdl=false","/p:GenerateSqlClrSymbols=false", "/p:CmdLineInMemoryStorage=true","/t:build" ,"","/m:1"] , //WarnAError prevents output of errors with project files 
+    "BuildConfig":"debug",
+    "nUnitTestWorkers":4,
+    "tSQLTests":false,
+    "appSettings" : 
+        [
+            {
+            "settingName" : "secret",
+            "settingValue" : "2" 
+            }   
+        ],
+    "IpAddresses": [
+        {
+            "name": "Azure",
+            "startIpAddress": "0.0.0.0",
+            "endIpAddress": "0.0.0.0"
+        },
+        {
+            "name": "Office",
+            "startIpAddress": "62.6.190.196",
+            "endIpAddress": "62.6.190.196"
+        }
+    ],
+    "ForceDeploy": false,
+    "CleanBuild":false
+}
