@@ -21,6 +21,9 @@ pool:
   vmImage: 'windows-latest'
 stages:
 - stage: build
+  variables:
+    environment: ci
+    
   displayName: Build 
   jobs:
   - job: Build
@@ -53,6 +56,8 @@ stages:
   jobs:
   - deployment: 
     environment: nuget_Sql_System_DacPacs
+    variables:
+      environment: prod
     displayName: "Publish to Github"
     strategy:
       runOnce:
