@@ -49,7 +49,7 @@ stages:
         publishLocation: 'pipeline'
 
 - stage: 
-  condition: eq(variables("Build.SourceBranchName"),"main")
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
   jobs:
   - deployment: 
     environment: nuget_Sql_System_DacPacs
@@ -59,7 +59,7 @@ stages:
         deploy:
           steps:
             - download: none
-            - download:
+            - download: current
               artifact: 'Sql.System.Dacpacs'
               target: '$(artifactsPath)/Sql.System.Dacpacs'
 
