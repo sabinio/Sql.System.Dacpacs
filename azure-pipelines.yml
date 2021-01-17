@@ -59,9 +59,11 @@ stages:
         deploy:
           steps:
             - download: none
-            - download: current
-              artifact: 'Sql.System.Dacpacs'
-              target: '$(artifactsPath)/Sql.System.Dacpacs'
+            - task: DownloadPipelineArtifact@2
+              inputs:
+                buildType: 'current'
+                artifactName: Sql.System.Dacpacs
+                targetPath: '$(artifactsPath)/Sql.System.Dacpacs'
 
             - task: NuGetCommand@2
               inputs:
