@@ -62,7 +62,7 @@ stages:
             - task: DownloadPipelineArtifact@2
               inputs:
                 buildType: 'current'
-                artifactName: Sql.System.Dacpacs
+                artifactName: sabinio.Sql.System.Dacpacs
                 targetPath: '$(artifactsPath)/sabinio.Sql.System.Dacpacs'
 
             - task: NuGetCommand@2
