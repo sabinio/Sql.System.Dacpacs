@@ -1,5 +1,4 @@
 
-name: $(BuildDefinitionName)_$(VersionNumber)_$(SourceBranchName)
 trigger:
 - main
 parameters:
@@ -42,9 +41,31 @@ stages:
         &"$(System.DefaultWorkingDirectory)/.build/pipeline-tasks.ps1" -Package -Install
       displayName: 'Package'
 
-    - task: PublishBuildArtifacts@1
+    - task: PublishPipelineArtifact@1
       displayName: 'Publish Artifacts Sql.System.Dacpacs'
       inputs:
-        PathtoPublish: '$(artifactsPath)/Sql.System.Dacpacs'
-        ArtifactName: 'Sql.System.Dacpacs'
-      condition: succeededOrFailed()
+        targetPath: '$(artifactsPath)/Sql.System.Dacpacs'
+        artifact: 'Sql.System.Dacpacs'
+        publishLocation: 'pipeline'
+
+- stage: 
+  condition: eq(variables("Build.SourceBranchName"),"main")
+  jobs:
+  - deployment: 
+    environment: nuget_Sql_System_DacPacs
+    displayName: "Publish to Github"
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - download: none
+            - download:
+              artifact: 'Sql.System.Dacpacs'
+              target: '$(artifactsPath)/Sql.System.Dacpacs'
+
+            - task: NuGetCommand@2
+              inputs:
+                command: 'push'
+                packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+                nuGetFeedType: 'external'
+                publishFeedCredentials: 'NUget'
