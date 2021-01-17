@@ -42,10 +42,10 @@ stages:
       displayName: 'Package'
 
     - task: PublishPipelineArtifact@1
-      displayName: 'Publish Artifacts Sql.System.Dacpacs'
+      displayName: 'Publish Artifacts sabinio.Sql.System.Dacpacs'
       inputs:
-        targetPath: '$(artifactsPath)/Sql.System.Dacpacs'
-        artifact: 'Sql.System.Dacpacs'
+        targetPath: '$(artifactsPath)/sabinio.Sql.System.Dacpacs'
+        artifact: 'sabinio.Sql.System.Dacpacs'
         publishLocation: 'pipeline'
 
 - stage: 
@@ -63,11 +63,11 @@ stages:
               inputs:
                 buildType: 'current'
                 artifactName: Sql.System.Dacpacs
-                targetPath: '$(artifactsPath)/Sql.System.Dacpacs'
+                targetPath: '$(artifactsPath)/sabinio.Sql.System.Dacpacs'
 
             - task: NuGetCommand@2
               inputs:
                 command: 'push'
-                packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+                packagesToPush: '$(Build.ArtifactStagingDirectory)/sabinio.Sql.System.Dacpacs/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
                 nuGetFeedType: 'external'
                 publishFeedCredentials: 'NUget'

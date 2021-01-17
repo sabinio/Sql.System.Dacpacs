@@ -3,6 +3,7 @@ param (
     [Switch] $Install,
     [Switch] $Build,
     [switch] $Package,
+    [switch] $Publish,
     [switch] $noLogo,
     [string] $environment = $env:environment,
     [string] $rootPath = $env:rootpath,

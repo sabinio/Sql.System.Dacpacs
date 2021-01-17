@@ -1,6 +1,6 @@
 {
     "environment":"{$environment}",
-    "ProjectName": "sql.system.dacpacs",
+    "ProjectName": "sabinio.Sql.System.Dacpacs",
     "FullVersion":"{$env:VERSIONNUMBER}",
     "ForceDeploy": false,
     "CleanBuild":false

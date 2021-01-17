@@ -13,7 +13,7 @@ param($settings, $ArtifactsPath)
         $DatabaseProjectVSIX= ([System.IO.Path]::Combine($ArtifactsPath,"DatabaseProject","extension","BuildDirectory","SystemDacpacs","*"))
         Publish-Artifacts -artifactsPath  $artifactsPath -PackagePaths $DatabaseProjectVSIX,"*.nuspec"         -name "SystemDacPacs" -verbose:$VerbosePreference
 
-        &$env:nugetPath pack (join-path $artifactsPath "SystemDacPacs")  -outputDirectory  (join-path $artifactsPath "Sql.System.Dacpacs")
+        &$env:nugetPath pack (join-path $artifactsPath "SystemDacPacs")  -outputDirectory  (join-path $artifactsPath "sabinio.Sql.System.Dacpacs") -version $settings.FullVersion
     }
     catch{
         Throw
