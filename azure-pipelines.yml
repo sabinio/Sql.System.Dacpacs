@@ -68,6 +68,6 @@ stages:
             - task: NuGetCommand@2
               inputs:
                 command: 'push'
-                packagesToPush: '$(Build.ArtifactStagingDirectory)/sabinio.Sql.System.Dacpacs/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+                packagesToPush: $(artifactsPath)/sabinio.Sql.System.Dacpacs/*.nupkg
                 nuGetFeedType: 'external'
                 publishFeedCredentials: 'NUget'
