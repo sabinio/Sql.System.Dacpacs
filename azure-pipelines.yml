@@ -51,28 +51,9 @@ stages:
         artifact: 'sabinio.Sql.System.Dacpacs'
         publishLocation: 'pipeline'
 
-- stage: 
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
-  jobs:
-  - deployment: 
-    environment: nuget_Sql_System_DacPacs
-    variables:
-      environment: prod
-    displayName: "Publish to Github"
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-            - download: none
-            - task: DownloadPipelineArtifact@2
-              inputs:
-                buildType: 'current'
-                artifactName: sabinio.Sql.System.Dacpacs
-                targetPath: '$(artifactsPath)/sabinio.Sql.System.Dacpacs'
-
-            - task: NuGetCommand@2
-              inputs:
-                command: 'push'
-                packagesToPush: $(artifactsPath)/sabinio.Sql.System.Dacpacs/*.nupkg
-                nuGetFeedType: 'external'
-                publishFeedCredentials: 'NUget'
+    - task: NuGetCommand@2
+      inputs:
+        command: 'push'
+        packagesToPush: $(artifactsPath)/sabinio.Sql.System.Dacpacs/*.nupkg
+        nuGetFeedType: 'external'
+        publishFeedCredentials: 'NUget'
